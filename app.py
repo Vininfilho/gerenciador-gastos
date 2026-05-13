@@ -9,7 +9,7 @@ st.set_page_config(page_title="Gerenciador PRO", layout="centered")
 url = "https://zwmudbquylkilddwjabg.supabase.co"
 
 # ⚠️ COLOQUE SUA ANON KEY AQUI (NÃO publishable)
-key = "SUA_ANON_KEY_AQUI"
+key = "sb_publishable_pWPdvTuV05pSo2RF4tCDGQ_qwp_10cz"
 
 supabase = create_client(url, key)
 
