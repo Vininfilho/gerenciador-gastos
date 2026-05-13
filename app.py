@@ -8,7 +8,7 @@ st.set_page_config(page_title="Gerenciador PRO", layout="centered")
 # -------- SUPABASE --------
 url = "https://zwmudbquylkilddwjabg.supabase.co"
 
-# ⚠️ CORRIGIDO: use anon key (NUNCA publishable aqui)
+# ⚠️ COLOQUE SUA ANON KEY AQUI (NÃO publishable)
 key = "SUA_ANON_KEY_AQUI"
 
 supabase = create_client(url, key)
@@ -41,7 +41,7 @@ if not st.session_state.user:
                 st.error("Erro no login")
 
         except Exception as e:
-            st.error(str(e))  # 🔥 AGORA MOSTRA O ERRO REAL
+            st.error(str(e))
 
     if col2.button("Criar conta"):
         try:
@@ -49,7 +49,7 @@ if not st.session_state.user:
                 "email": email,
                 "password": senha
             })
-            st.success("Conta criada! Confirme o email se necessário.")
+            st.success("Conta criada! Verifique o email se necessário.")
         except Exception as e:
             st.error(str(e))
 
@@ -58,7 +58,7 @@ if not st.session_state.user:
 user_id = st.session_state.user.id
 
 # -------- HEADER --------
-col1, col2 = st.columns([3,1])
+col1, col2 = st.columns([3, 1])
 col1.title("💸 Gerenciador PRO")
 
 if col2.button("Sair"):
@@ -99,15 +99,14 @@ if submitted:
                 "categoria": categoria
             }).execute()
 
-            # 🔥 DEBUG real do Supabase
             if response.data:
                 st.success("Gasto adicionado!")
                 st.rerun()
             else:
-                st.error(str(response))
+                st.error("Erro ao salvar no banco")
 
         except Exception as e:
-            st.error(str(e))  # 🔥 mostra erro real
+            st.error(str(e))
 
 # -------- BUSCAR --------
 try:
@@ -118,6 +117,7 @@ try:
         .execute()
 
     gastos = res.data if res.data else []
+
 except Exception as e:
     gastos = []
     st.error(str(e))
@@ -126,7 +126,7 @@ except Exception as e:
 st.subheader("📋 Seus Gastos")
 
 for g in gastos:
-    col1, col2, col3, col4 = st.columns([3,2,2,2])
+    col1, col2, col3, col4 = st.columns([3, 2, 2, 2])
 
     col1.write(g["nome"])
     col2.write(g["categoria"])
